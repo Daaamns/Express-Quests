@@ -72,7 +72,7 @@ describe("POST /api/users", () => {
     expect(typeof userInDatabase.language).toBe("string");
   });
   it("should return an error", async () => {
-    const userWithMissingProps = { firstname: "Anna" };
+    const userWithMissingProps = { firstname: "Dimitri" };
 
     const response = await request(app)
       .post("/api/users")
