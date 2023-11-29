@@ -1,10 +1,45 @@
 const database = require("../../database");
 
 const getUsers = (req, res) => {
-  database.query("select * from users").then(([users]) => {
-    res.json(users);
-    res.status(200);
-  });
+  let sql = "select * from users";
+  const sqlValues = [];
+
+  if (req.query.language != null && req.query.city != null) {
+    sql += " where language = ? AND city = ?";
+    sqlValues.push(req.query.language, req.query.city);
+  } else if (req.query.language != null) {
+    sql += " where language = ?";
+    sqlValues.push(req.query.language);
+  } else if (req.query.city != null) {
+    sql += " where city = ?";
+    sqlValues.push(req.query.city);
+  }
+
+  // let where = [];
+
+  // if (req.query.language) {
+  //   where.push(`language = ?`)
+  //   sqlValues.push(req.query.language)
+  // }
+
+  // if (req.query.city) {
+  //   where.push(`city = ?`)
+  //   sqlValues.push(req.query.city)
+  // }
+
+  // if (where.length) {
+  //   sql += ' WHERE ' + where.join(' AND ')
+  // }
+
+  database
+    .query(sql, sqlValues)
+    .then(([users]) => {
+      res.json(users);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 };
 
 const getUserById = (req, res) => {
