@@ -167,7 +167,7 @@ describe("DELETE /api/users/:id", () => {
     const newUser = {
       firstname: "damien",
       lastname: "Jean",
-      email: "yo@hotmail.fr",
+      email: `${crypto.randomUUID()}@wild.co`,
       city: "paris",
       language: "fr",
     };
