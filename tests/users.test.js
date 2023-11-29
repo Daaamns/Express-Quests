@@ -165,11 +165,11 @@ describe("PUT /api/users/:id", () => {
 describe("DELETE /api/users/:id", () => {
   it("should delete user", async () => {
     const newUser = {
-      firstname: "Avatar",
-      lastname: "James Cameron",
-      email: "2009",
-      city: true,
-      language: 162,
+      firstname: "damien",
+      lastname: "Jean",
+      email: "yo@hotmail.fr",
+      city: "paris",
+      language: "fr",
     };
 
     const [result] = await database.query(
